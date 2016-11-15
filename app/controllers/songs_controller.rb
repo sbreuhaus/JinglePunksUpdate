@@ -7,8 +7,7 @@ class SongsController < ApplicationController
   # GET /songs
   # GET /songs.json
   def index
-    @songs = SongTag.includes(:tag).all
-    @tags = Tag.all
+    @songs = Song.all
     if params[:search]
       @songs = Song.search(params[:search]).order("created_at DESC")
     else
