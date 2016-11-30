@@ -7,12 +7,17 @@ class SongsController < ApplicationController
   # GET /songs
   # GET /songs.json
   def index
+
     if params[:search]
-      @songs = Song.search(params[:search]).order("created_at DESC")
+
+      @filter_songs = Song.includes(:tags).where({tags: {name: params[:search]}})
+
     else
       @songs = Song.all
     end
   end
+
+
 
   # GET /songs/1
   # GET /songs/1.json
@@ -72,6 +77,10 @@ class SongsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_song
       @song = Song.find(params[:id])
+    end
+
+    def set_tag
+      @tags = @song.tags
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

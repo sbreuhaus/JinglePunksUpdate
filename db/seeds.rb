@@ -9,10 +9,8 @@ csv.each do |row|
   new_tags = tag_row.split(/\s*,\s*/)
 
   new_tags.each do |tag|
-    t = Tag.new
-    t.name = tag
-    s.tags << t
-    t.save!
+    t = Tag.find_or_create(name: tag)
+    s.tags << t unless song.tags.includes?(t)
   end
   s.save!
 

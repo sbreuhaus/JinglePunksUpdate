@@ -12,10 +12,7 @@
     <% @songs.each_with_index do |song, index| %>
       <tr>
         <td><%= song.name %></td>
-
-        <td><%= song.tags.pluck(:name).join(', ') %></td> 
-
-
+        <td><%= song.tags.pluck(:name).join(', ') %></td>
         <td><%= link_to 'Show', song %></td>
         <td><%= link_to 'Edit', edit_song_path(song) %></td>
         <td><%= link_to 'Delete', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -24,6 +21,4 @@
   </tbody>
 </table>
 <br>
-<% else %>
-  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
 <% end %>
